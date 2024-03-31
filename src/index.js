@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { PORT } = require("./config/serverconfig");
+const { PORT,FLIGHT_SERVICE_PATH } = require("./config/serverconfig");
 const bodyParser = require("body-parser");
 const apiRoutes = require("./routes/index");
 const db = require("./models/index");
@@ -21,6 +21,7 @@ const setupAndStartServer = () => {
         alter: true,
       });
     }
+    console.log(FLIGHT_SERVICE_PATH);
   });
 };
 setupAndStartServer();
