@@ -1,5 +1,7 @@
 const amqplib = require("amqplib");
 const {MESSAGE_BROKER_URL,EXCHANGE_NAME}=require('../config/serverconfig')
+
+
 const createChannel = async () => {
   try {
     const connection = await amqplib.connect(MESSAGE_BROKER_URL);
@@ -29,7 +31,7 @@ const subscribeMessage = async (channel, service, binding_key) => {
 };
 const publishMesssage = async (channel, binding_key, message) => {
   try {
-    await channel.assertQueue("QUEUE_NAME");
+    await channel.assertQueue("REMINDER_QUEUE");
     await channel.publish(EXCHANGE_NAME, binding_key, Buffer.from(message));
   } catch (error) {
     throw error;
@@ -40,3 +42,5 @@ module.exports = {
   createChannel,
   publishMesssage
 };
+
+
